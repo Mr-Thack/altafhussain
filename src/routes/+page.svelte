@@ -6,6 +6,12 @@
     import isCustom from '$lib/isCustom';
 </script>
 
+<style>
+.bigbox {
+    backdrop-filter: opacity(50%);
+}
+</style>
+
 {#if isCustom}
 <!-- First, we need to introduce him -->
 <section class="bg-gradient-to-tr from-green-600 to-gray-300 to-60%">
@@ -29,7 +35,7 @@
     <div class="max-w-screen-xl px-4 py-8 mx-auto md:gap-8 md:gap-0 md:py-16 md:grid md:grid-cols-12">
         <div class="place-self-center text-center md:text-left md:mr-auto md:col-span-7">
             <h1 class="max-w-2xl mb-3 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl dark:text-white">
-                Help This Generation
+                
             </h1>
             <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-green-600">
                 Build a Better Nation
@@ -67,23 +73,33 @@
     </div>
 </section>
 -->
-<section class="bg-gradient-to-tr from-green-900">
+<section class="bg-gradient-to-tr from-primary-600">
     <div class="max-w-screen-xl px-4 py-8 mx-auto md:gap-8 md:gap-0 md:py-16">
         <div class="flex flex-col place-self-center items-center text-center">
-            <h1 class="max-w-2xl mb-3 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-green-900 dark:text-green-300">
-                Nation Needs Your Help
+            
+            <h1 class="max-w-2xl mb-5 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-primary-600 dark:text-green-300">
+                Help Your Nation
             </h1>
-            <p class="mb-3 text-xl tracking-tight leading-none md:text-2xl xl:text-2xl dark:text-white">
-                Help us in building a great future for our deprived nation. Please donate generously.
+            <h1 class="max-w-2xl mb-5 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-primary-600 dark:text-green-300">
+                Build a New Generation
+            </h1>
+            <p class="mb-3 text-2xl tracking-tight text-primary-700 leading-none md:text-3xl xl:text-4xl dark:text-white">
+                Help us build a great future for our deprived nation
             </p>
             
-            <p class="mb-3 text-xl tracking-tight leading-none md:text-2xl xl:text-2xl dark:text-white">
-                MQM is the only hope for the poor and helpless people of Pakistan. Help MQM help the needy. Please donate generously.
+            
+
+            <p class="mb-5 mt-4 md:mt-8 font-bold tracking-tight leading-none text-2xl text-secondary-700 md:text-3xl xl:text-4xl dark:text-white">
+                Gift for the Founder and Leader, Altaf Hussain
             </p>
-            <div class="inline-flex gap-4">
-                <h1 class="font-bold text-red-900 text-5xl text-center mr-5">Gift for Altaf Hussain:</h1>
-                {#each [5, 10,20,50] as amt}
-                    <Button size="xl" class="text-xl">${amt}</Button>
+            <div class="inline-flex flex-wrap flex-start justify-center gap-4">
+                {#each [5, 10, 20, 50, 100] as amt}
+                <button type="button" class="focus:outline-none text-white bg-secondary-700 hover:bg-secondary-800 focus:ring-4 focus:ring-secondary-300 font-medium md:text-xl rounded-lg text-sm px-5 py-2.5 dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-900">
+                    ${amt}
+                </button>
+                    <!--
+                        <Button size="xl" class="text-xl">${amt}</Button>
+                    -->
                 {/each}
                 <input type="number" class="text-xl rounded-lg" placeholder="Other">
             </div>
@@ -91,15 +107,25 @@
     </div>
 </section>
 
+<hr>
+<hr>
+<hr>
+<hr>
+
+
 <!--This is for the Boxes-->
-<section class="bg-gradient-to-br from-green-900 to-90% flex flex-row items-center flex-wrap gap-8 py-10 px-8 lg:px-24 justify-around">
+<section class="bg-gradient-to-br from-primary-600 flex flex-row items-center flex-wrap gap-8 py-10 px-8 lg:px-24 justify-around">
     {#each Boxes as box}
-        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <a href={box.href}>
-                <h5 class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">{box.name}</h5>
-            </a>
-            <p class="mb-3 text-center font-normal text-gray-700 dark:text-gray-400">{box.description}</p>
-            <a href={box.href} class="flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+        <div class="h-full flex-1 flex-grow">
+            <div style="background-image: url({box.bg}); background-color: rgba(255,255,255,0.5);" class="relative bigbox bg-cover bg-center max-w-sm p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a href={box.href}>
+                    <h5 class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">{box.name}</h5>
+                </a>
+                <br>
+                <p class="mb-3 text-center font-normal text-gray-700 dark:text-gray-400">{box.description}</p>
+                
+            </div>
+            <a href={box.href} class="mt-5 flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-secondary-600 rounded-lg hover:bg-secondary-700 focus:ring-4 focus:outline-none focus:ring-secondary-300 dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-800">
                 {box.more}
                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
