@@ -3,13 +3,136 @@
     import pose from '$lib/assets/altaf_hussain.png';
     import Boxes from '$lib/boxes';
     import { Button } from 'flowbite-svelte';
+    import { onMount } from 'svelte';
     import isCustom from '$lib/isCustom';
+
+    const themeSizes = {
+        "sm": 640,
+        "md": 768,
+        "lg": 1024
+    };
+
+    let offset = 4;
+
+    // Don't have time, just copying and pasting 3 times
+    function issm() {
+        return !ismd() && !islg();
+    }
+
+    function ismd() {
+        return window.innerWidth > themeSizes['md'] && !islg();
+    }
+
+    function islg() {
+        return window.innerWidth > themeSizes['lg'];
+    }
+
+    function getSize() {
+        if (islg()) {
+            return 'lg';
+        } else if (ismd()) {
+            return 'md';
+        } else {
+            return 'sm';
+        }
+    }
+
+    function getOffset() {
+        return {
+            'sm': 2,
+            'md': 3,
+            'lg': 4
+        }[getSize()];
+    }
+
+    let isLoaded = false;
+    onMount(() => {
+        offset = getOffset();
+        window.onresize = () => {
+            offset = getOffset();
+        }
+        isLoaded = true;
+    });
+    
+
+
 </script>
 
 <style>
-.bigbox {
-    backdrop-filter: opacity(50%);
+/* .bigbox {
+    overflow: auto;
+    position: relative;
+    backdrop-filter: opacity(100%);
 }
+
+.bigbox::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+
+    background-image: url(/src/lib/assets/box_images/bio.jpg);
+    display: block;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+    filter: blur(.05rem); 
+} */
+
+.blink {
+  animation: blink-animation 10s steps(10, start) infinite;
+  /* -webkit-animation: blink-animation 1s steps(5, start) infinite; */
+}
+
+@keyframes blink-animation {
+  
+  50% {
+    visibility: hidden;
+  }
+  51% {
+    visibilty: visible;
+  }
+}
+
+.blink-2 {
+  animation: blink-animation-2 10s steps(10, start) infinite;
+  /* -webkit-animation: blink-animation 1s steps(5, start) infinite; */
+}
+
+@keyframes blink-animation-2 {
+  0% {
+    visibility: visible;
+  }
+  30% {
+    visibility: hidden;
+  }
+  31% {
+    visibility: visible;
+  }
+  50% {
+    visibility: hidden;
+  }
+  51% {
+    visibility: visible;
+  }
+}
+
+
+/* @-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+} */
+
+.anim-delay1  { animation-delay: 1s }
+.anim-delay2  { animation-delay: 2s }
+.anim-delay3  { animation-delay: 3s }
+.anim-delay4  { animation-delay: 4s }
+.anim-delay5  { animation-delay: 5s }
+.anim-delay6  { animation-delay: 6s }
 </style>
 
 {#if isCustom}
@@ -89,19 +212,19 @@
             
             
 
-            <p class="mb-5 mt-4 md:mt-8 font-bold tracking-tight leading-none text-2xl text-secondary-700 md:text-3xl xl:text-4xl dark:text-white">
+            <p class="blink-2 mb-5 mt-4 md:mt-8 font-bold tracking-tight leading-none text-2xl text-secondary-700 md:text-3xl xl:text-4xl dark:text-white">
                 Gift for the Founder and Leader, Altaf Hussain
             </p>
             <div class="inline-flex flex-wrap flex-start justify-center gap-4">
-                {#each [5, 10, 20, 50, 100] as amt}
-                <button type="button" class="focus:outline-none text-white bg-secondary-700 hover:bg-secondary-800 focus:ring-4 focus:ring-secondary-300 font-medium md:text-xl rounded-lg text-sm px-5 py-2.5 dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-900">
-                    ${amt}
-                </button>
+                {#each [5, 10, 20, 50, 100] as amt, i}
+                    <button type="button" class="blink anim-delay{(i+1)} focus:outline-none text-white bg-secondary-700 hover:bg-secondary-800 focus:ring-4 focus:ring-secondary-300 font-medium md:text-xl rounded-lg text-sm px-5 py-2.5 dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-900">
+                        ${amt}
+                    </button>
                     <!--
                         <Button size="xl" class="text-xl">${amt}</Button>
                     -->
                 {/each}
-                <input type="number" class="text-xl rounded-lg" placeholder="Other">
+                <input type="number" class="blink anim-delay6 text-xl rounded-lg" placeholder="Other">
             </div>
         </div>    
     </div>
@@ -114,24 +237,27 @@
 
 
 <!--This is for the Boxes-->
-<section class="bg-gradient-to-br from-primary-600 flex flex-row items-center flex-wrap gap-8 py-10 px-8 lg:px-24 justify-around">
-    {#each Boxes as box}
-        <div class="h-full flex-1 flex-grow">
-            <div style="background-image: url({box.bg}); background-color: rgba(255,255,255,0.5);" class="relative bigbox bg-cover bg-center max-w-sm p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <a href={box.href}>
-                    <h5 class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">{box.name}</h5>
-                </a>
-                <br>
-                <p class="mb-3 text-center font-normal text-gray-700 dark:text-gray-400">{box.description}</p>
-                
+<!-- bg-gradient-to-br from-primary-600  -->
+<section class="bg-gradient-to-br from-primary-600 flex grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 py-10 px-8 lg:px-24">
+    {#if isLoaded}
+    {#each Boxes as box, i}
+        {#if i % offset == 0 && Boxes.length < i + offset}
+            <div>
+                <!-- This is to center the column -->
             </div>
-            <a href={box.href} class="mt-5 flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-secondary-600 rounded-lg hover:bg-secondary-700 focus:ring-4 focus:outline-none focus:ring-secondary-300 dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-800">
-                {box.more}
-                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                </svg>
-            </a>
-        </div>
+        {/if}
+        <a href="{box.href}" class="h-full w-full flex flex-col align-center">
+            <!--
+                <div class="relative bigbox max-w-sm p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                
+                
+                </div>
+            -->
+            <img src="/src/lib/assets/box_images/{box.bg}" alt={box.name} class="mx-auto md:w-[33dvh] md:h-auto">
+            <h5 class="md:mb-1 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">{box.name}</h5>
+            <p class="font-bold text-center font-normal text-gray-700 dark:text-gray-400">{box.description}</p>
+        </a>
     {/each}
+    {/if}
 </section>
 {/if}
