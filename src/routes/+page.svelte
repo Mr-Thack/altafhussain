@@ -1,10 +1,12 @@
 <script lang='ts'>
     import speech from '$lib/assets/speech.png';
-    import pose from '$lib/assets/altaf_hussain.png';
     import Boxes from '$lib/boxes';
-    import { Button } from 'flowbite-svelte';
     import { onMount } from 'svelte';
     import isCustom from '$lib/isCustom';
+    import { slide } from 'svelte/transition';
+    import Donate from './Donate.svelte';
+
+    
 
     const themeSizes = {
         "sm": 640,
@@ -45,6 +47,8 @@
         }[getSize()];
     }
 
+    let heroState = 0;
+
     let isLoaded = false;
     onMount(() => {
         offset = getOffset();
@@ -52,20 +56,32 @@
             offset = getOffset();
         }
         isLoaded = true;
+        heroState = 0;
+
+        setInterval(() => {
+            heroState = (heroState + 1) % 3;
+        }, 5000);
     });
-    
 
-
+    const animSpeed = 500;
 </script>
 
 <style>
-/* .bigbox {
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&display=swap');
+
+#hero {
+    height: 50dvh;
+}
+
+.hero {
     overflow: auto;
     position: relative;
+    height: 100%;
+    width: 100%;
     backdrop-filter: opacity(100%);
 }
 
-.bigbox::before {
+.hero:before {
     content: "";
     position: absolute;
     top: 0;
@@ -73,22 +89,43 @@
     right: 0;
     z-index: -1;
 
-    background-image: url(/src/lib/assets/box_images/bio.jpg);
     display: block;
-    background-size: 100% 100%;
+    filter: blur(.05rem);
+
     width: 100%;
     height: 100%;
-    opacity: .5;
-    filter: blur(.05rem); 
-} */
+}
 
-.blink {
-  animation: blink-animation 10s steps(10, start) infinite;
-  /* -webkit-animation: blink-animation 1s steps(5, start) infinite; */
+#hero1:before {
+    background-image: url(/src/lib/assets/hd1.png);
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 95% center;
+}
+
+#hero2:before {
+    background-image: url(/src/lib/assets/building.png);
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#hero3:before {
+    background-image: url(/src/lib/assets/house.jpg);
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* .blink {
+  animation: blink-animation 8s steps(8, start) infinite;
+  -webkit-animation: blink-animation 8s steps(8, start) infinite;
 }
 
 @keyframes blink-animation {
-  
   50% {
     visibility: hidden;
   }
@@ -97,19 +134,44 @@
   }
 }
 
-.blink-2 {
-  animation: blink-animation-2 10s steps(10, start) infinite;
-  /* -webkit-animation: blink-animation 1s steps(5, start) infinite; */
+@-webkit-keyframes blink-animation {
+  50% {
+    visibility: hidden;
+  }
+  51% {
+    visibilty: visible;
+  }
+} */
+
+/* .blink {
+  animation: blink-animation 2s steps(10, start) infinite;
+  -webkit-animation: blink-animation 12s steps(100, start) infinite;
 }
 
-@keyframes blink-animation-2 {
+@keyframes blink-animation {
   0% {
     visibility: visible;
   }
-  30% {
+  40% {
     visibility: hidden;
   }
-  31% {
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+} */
+
+
+/* @-webkit-keyframes blink-animation {
+  0% {
+    visibility: visible;
+  }
+  47% {
+    visibility: hidden;
+  }
+  48% {
     visibility: visible;
   }
   50% {
@@ -118,24 +180,11 @@
   51% {
     visibility: visible;
   }
-}
-
-
-/* @-webkit-keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
 } */
-
-.anim-delay1  { animation-delay: 1s }
-.anim-delay2  { animation-delay: 2s }
-.anim-delay3  { animation-delay: 3s }
-.anim-delay4  { animation-delay: 4s }
-.anim-delay5  { animation-delay: 5s }
-.anim-delay6  { animation-delay: 6s }
 </style>
 
 {#if isCustom}
+
 <!-- First, we need to introduce him -->
 <section class="bg-gradient-to-tr from-green-600 to-gray-300 to-60%">
     <div class="bg-contain bg-[url($lib/assets/speech_opaque.png)] bg-no-repeat bg-center md:bg-none max-w-screen-xl px-4 py-8 mx-auto md:gap-8 md:gap-0 md:py-16 md:grid md:grid-cols-12">
@@ -196,36 +245,47 @@
     </div>
 </section>
 -->
+<section id="hero" class="bg-gradient-to-br from-secondary-600">
+    {#if heroState == 0}
+        <div    in:slide={{ delay: 1000, duration: animSpeed, axis: 'x' }}
+                out:slide={{ delay: 0, duration: animSpeed, axis: 'x' }}
+                id="hero1" class="hero">
+            <h1 class="pl-4 pb-4 md:pb-8 text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold italic">Founder and Leader of MQM,</h1>
+            <h1 class="pl-8 md:pl-16 xl:pl-24 text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold font-display">Mr. Altaf Hussain</h1>
+        </div>
+    {:else if heroState == 1}
+        <div    in:slide={{ delay: 1000, duration: animSpeed, axis: 'x' }}
+                out:slide={{delay: 0, duration: animSpeed, axis: 'x' }}
+                id="hero2" class="hero">
+        </div>
+    {:else if heroState == 2}
+        <div    in:slide={{ delay: 1000, duration: animSpeed, axis: 'x' }}
+                out:slide={{delay: 0, duration: animSpeed, axis: 'x' }}
+                id="hero3" class="hero">
+        </div>
+    {/if}
+</section>
+
+<hr>
+<hr>
+<hr>
+<hr>
+
 <section class="bg-gradient-to-tr from-primary-600">
-    <div class="max-w-screen-xl px-4 py-8 mx-auto md:gap-8 md:gap-0 md:py-16">
+    <div class="max-w-screen-xl mx-auto py-8 md:py-16">
         <div class="flex flex-col place-self-center items-center text-center">
-            
             <h1 class="max-w-2xl mb-5 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-primary-600 dark:text-green-300">
-                Help Your Nation
+                Help us Build a Great Nation
             </h1>
             <h1 class="max-w-2xl mb-5 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl text-primary-600 dark:text-green-300">
-                Build a New Generation
+                For our Future Generation
             </h1>
             <p class="mb-3 text-2xl tracking-tight text-primary-700 leading-none md:text-3xl xl:text-4xl dark:text-white">
                 Help us build a great future for our deprived nation
             </p>
             
-            
 
-            <p class="blink-2 mb-5 mt-4 md:mt-8 font-bold tracking-tight leading-none text-2xl text-secondary-700 md:text-3xl xl:text-4xl dark:text-white">
-                Gift for the Founder and Leader, Altaf Hussain
-            </p>
-            <div class="inline-flex flex-wrap flex-start justify-center gap-4">
-                {#each [5, 10, 20, 50, 100] as amt, i}
-                    <button type="button" class="blink anim-delay{(i+1)} focus:outline-none text-white bg-secondary-700 hover:bg-secondary-800 focus:ring-4 focus:ring-secondary-300 font-medium md:text-xl rounded-lg text-sm px-5 py-2.5 dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-900">
-                        ${amt}
-                    </button>
-                    <!--
-                        <Button size="xl" class="text-xl">${amt}</Button>
-                    -->
-                {/each}
-                <input type="number" class="blink anim-delay6 text-xl rounded-lg" placeholder="Other">
-            </div>
+           <Donate isCenter={false} id={1} />
         </div>    
     </div>
 </section>
@@ -253,7 +313,7 @@
                 
                 </div>
             -->
-            <img src="/src/lib/assets/box_images/{box.bg}" alt={box.name} class="mx-auto md:w-[33dvh] md:h-auto">
+            <img src="/src/lib/assets/box_images/{box.bg}" alt={box.name} class="rounded-lg md:rounded-xl 2xl:rounded-3xl mx-auto md:w-[33dvh] md:h-auto">
             <h5 class="md:mb-1 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">{box.name}</h5>
             <p class="font-bold text-center font-normal text-gray-700 dark:text-gray-400">{box.description}</p>
         </a>
