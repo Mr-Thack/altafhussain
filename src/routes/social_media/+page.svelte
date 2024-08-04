@@ -61,14 +61,14 @@
 </style>
 
 <div class="bg-gradient-to-br from-green-600">
-    <section class="grid grid-cols-1 sm:grid-cols-3 gap-8 px-16 pb-6 pt-4 md:pt-8 xl:pt-16 2xl:pt-24">
+    <section class="lg:w-[70%] xl:w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 px-16 pb-6 pt-4 md:pt-8 xl:pt-16 2xl:pt-24">
         {#each Socials as social, i}
             {#if i != 0}
                 <div></div>
             {/if}
             <a href={social.href} class="transCard block max-w my-auto p-6 rounded-lg">
-                <img src={social.img} style="height: 100%; width: 100%;" alt={social.href}>
-                <p class="text-center sm:text-xl lg:text-2xl mt-1 sm:mt-4">{social.tag}</p>
+                <img src={social.img} style="height: 90%; width: 100%;" alt={social.href}>
+                <p class="text-center sm:text-md lg:text-lg xl:text-xl mt-1 sm:mt-4">{social.tag}</p>
             </a>
         {/each}
     </section>

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Dropdown, DropdownItem } from 'flowbite-svelte';
-    import { Footer, FooterCopyright, FooterIcon } from 'flowbite-svelte';
+    import { Footer, FooterCopyright, FooterIcon, Button } from 'flowbite-svelte';
     import { TwitterSolid, ChevronDownOutline, InstagramSolid, DollarOutline } from 'flowbite-svelte-icons';
     import "../app.css";
     // import Boxes from '$lib/boxes';
@@ -24,9 +24,13 @@
         -->
         <div class="mx-auto flex flex-wrap justify-between items-center container">
             <NavBrand href={base + "/"}>
-                <img src={logo} class="my-3 mr-3 h-9 sm:h-12 md:h-16 lg:h-20 2xl:h-24" alt="MQM Logo" />            </NavBrand>
-            <NavHamburger />
-            <NavUl class="mx-auto mb-10 md:mb-0" classUl="bg-green-900 border-gray-500 md:bg-transparent md:border-0" {nonActiveClass}>
+                <img src={logo} class="my-3 mr-3 h-9 sm:h-12 md:h-16 lg:h-20 2xl:h-24" alt="MQM Logo" />
+            </NavBrand>
+            <div class="flex md:order-2">
+                <Button color="red" size="sm" href="{base}/gift">Gift</Button>
+                <NavHamburger />
+            </div>
+            <NavUl class="order-1 mx-auto mb-10 md:mb-0" classUl="bg-green-900 border-gray-500 md:bg-transparent md:border-0" {nonActiveClass}>
                 {#if isCustom || true}
                     <NavLi class="text-white" href={base + "/"}>Home</NavLi>
                     <NavLi class="text-white cursor-pointer">
