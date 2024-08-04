@@ -48,6 +48,7 @@
                     <Dropdown class="w-44 z-20">
                         <DropdownItem href="{base}/images">Images</DropdownItem>
                         <DropdownItem href="{base}/videos">Videos</DropdownItem>
+                        <DropdownItem href="{base}/songs">Songs</DropdownItem>
                     </Dropdown>
                     <NavLi href="{base}/social_media" class="text-white">Social Media</NavLi>
                     <NavLi href="{base}/contact" class="text-white">Contact</NavLi>

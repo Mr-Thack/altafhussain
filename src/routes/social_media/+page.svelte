@@ -1,7 +1,7 @@
 <script lang='ts'>
-    import { base } from '$app/paths';
-
     import YouTube from "$lib/assets/youtube_logo.png";
+    import TikTok from '$lib/assets/tiktok_logo.png';
+    import Twitter from '$lib/assets/twitter_logo.png';
 
     class Social {
         title: string
@@ -34,13 +34,13 @@
             "Tiktok",
             "https://www.tiktok.com/@altafhussain_90",
             "@altafhussain_90",
-            "https://img.freepik.com/premium-vector/square-tiktok-logo-isolated-white-background_469489-891.jpg"
+            TikTok
         ),
         new Social(
             "Twitter official",
             "https://www.twitter.com/altafhussain_90",
             "@altafhussain_90",
-            "https://m.media-amazon.com/images/I/61w1Q5OxE2L._AC_UF894,1000_QL80_.jpg",
+            Twitter
         ),
         new Social(
            "Instagram",
@@ -68,7 +68,7 @@
             {/if}
             <a href={social.href} class="transCard block max-w my-auto p-6 rounded-lg">
                 <img src={social.img} style="height: 90%; width: 100%;" alt={social.href}>
-                <p class="text-center sm:text-md lg:text-lg xl:text-xl mt-1 sm:mt-4">{social.tag}</p>
+                <p class="font-mono text-center sm:text-md lg:text-lg xl:text-xl mt-1 sm:mt-4">{social.tag}</p>
             </a>
         {/each}
     </section>
