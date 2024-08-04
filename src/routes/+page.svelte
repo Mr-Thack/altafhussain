@@ -5,7 +5,7 @@
     import isCustom from '$lib/isCustom';
     import { slide } from 'svelte/transition';
     import Donate from './Donate.svelte';
-
+    import { base } from '$app/paths';
     
 
     const themeSizes = {
@@ -186,8 +186,9 @@
 {#if isCustom}
 
 <!-- First, we need to introduce him -->
+<!--
 <section class="bg-gradient-to-tr from-green-600 to-gray-300 to-60%">
-    <div class="bg-contain bg-[url($lib/assets/speech_opaque.png)] bg-no-repeat bg-center md:bg-none max-w-screen-xl px-4 py-8 mx-auto md:gap-8 md:gap-0 md:py-16 md:grid md:grid-cols-12">
+    <div class="bg-contain bg-url- bg-no-repeat bg-center md:bg-none max-w-screen-xl px-4 py-8 mx-auto md:gap-8 md:gap-0 md:py-16 md:grid md:grid-cols-12">
         <div class="place-self-center text-center md:text-left md:mr-auto md:col-span-7">
             <h1 class="max-w-2xl mb-3 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl dark:text-white">
                 Help This Generation
@@ -201,8 +202,9 @@
         </div>     
     </div>
 </section>
-
+-->
 <!-- Second, short bio -->
+<!--
 <section class="bg-gradient-to-tr from-green-600 to-gray-300 to-60%">
     <div class="max-w-screen-xl px-4 py-8 mx-auto md:gap-8 md:gap-0 md:py-16 md:grid md:grid-cols-12">
         <div class="place-self-center text-center md:text-left md:mr-auto md:col-span-7">
@@ -218,12 +220,12 @@
         </div>     
     </div>
 </section>
-
+-->
 
 {:else}
 <!--
 <section class="bg-gradient-to-tr from-green-900">
-    <div class="bg-contain bg-[url($lib/assets/altaf_hussain.png)] bg-no-repeat bg-center md:bg-none max-w-screen-xl px-4 py-8 mx-auto md:gap-8 md:gap-0 md:py-16 md:grid md:grid-cols-12">
+    <div class="bg-contain bg-url bg-no-repeat bg-center md:bg-none max-w-screen-xl px-4 py-8 mx-auto md:gap-8 md:gap-0 md:py-16 md:grid md:grid-cols-12">
         <div class="place-self-center text-center md:text-left md:mr-auto md:col-span-7">
             <h1 class="max-w-2xl mb-3 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl dark:text-white">
                 Help This Generation
@@ -306,14 +308,14 @@
                 <!-- This is to center the column -->
             </div>
         {/if}
-        <a href="{box.href}" class="h-full w-full flex flex-col align-center">
+        <a href={base + box.href} class="h-full w-full flex flex-col align-center">
             <!--
                 <div class="relative bigbox max-w-sm p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 
                 
                 </div>
             -->
-            <img src="/src/lib/assets/box_images/{box.bg}" alt={box.name} class="rounded-lg md:rounded-xl 2xl:rounded-3xl mx-auto md:w-[33dvh] md:h-auto">
+            <img src="{base + box.bg}" alt={box.name} class="rounded-lg md:rounded-xl 2xl:rounded-3xl mx-auto md:w-[33dvh] md:h-auto">
             <h5 class="md:mb-1 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">{box.name}</h5>
             <p class="font-bold text-center font-normal text-gray-700 dark:text-gray-400">{box.description}</p>
         </a>
