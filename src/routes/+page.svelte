@@ -315,7 +315,7 @@
                 
                 </div>
             -->
-            <img src="{base + box.bg}" alt={box.name} class="rounded-lg md:rounded-xl 2xl:rounded-3xl mx-auto md:w-[33dvh] md:h-auto">
+            <img src="{box.bg}" alt={box.name} class="rounded-lg md:rounded-xl 2xl:rounded-3xl mx-auto md:w-[33dvh] md:h-auto">
             <h5 class="md:mb-1 text-2xl text-center font-bold tracking-tight text-gray-900 dark:text-white">{box.name}</h5>
             <p class="font-bold text-center font-normal text-gray-700 dark:text-gray-400">{box.description}</p>
         </a>

@@ -7,10 +7,12 @@
         title: string
         href: string
         img: string
+        tag: string
 
-        constructor(title: string, href: string, img: string) {
+        constructor(title: string, href: string, tag: string, img: string) {
             this.title = title;
             this.href = href;
+            this.tag = tag;
             this.img = img;
         }
     }
@@ -19,39 +21,55 @@
         new Social(
             "YouTube official channel",
             "https://youtube.com/@altafhussain_90?si=e0B24CC2EKjLNzxX",
+            "@altafhussain_90",
             YouTube
         ),
         new Social(
             "Revelations with Altaf Hussain",
             "https://www.facebook.com/AltafHussainRev",
+            "@AltafHussainRev",
             "https://cdn.iconscout.com/icon/free/png-256/free-facebook-2038470-1718513.png"
         ),
         new Social(
             "Tiktok",
             "https://www.tiktok.com/@altafhussain_90",
+            "@altafhussain_90",
             "https://img.freepik.com/premium-vector/square-tiktok-logo-isolated-white-background_469489-891.jpg"
         ),
         new Social(
             "Twitter official",
             "https://www.twitter.com/altafhussain_90",
+            "@altafhussain_90",
             "https://m.media-amazon.com/images/I/61w1Q5OxE2L._AC_UF894,1000_QL80_.jpg",
         ),
         new Social(
            "Instagram",
            "https://www.instagram.com/altafhussain_90",
+           "@altafhussain_90",
            "https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-instagram-new-square2-512.png"
         )
     ];
 </script>
+<style>
+    .transCard {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
 
-<section class="grid grid-cols-5 md:grid-cols-9 gap-8 mx-16 mt-4 md:mt-8 xl:mt-16 2xl:mt-24">
-    {#each Socials as social, i}
-        {#if i != 0}
-            <div></div>
-        {/if}
-        <a href={social.href} class="block max-w my-auto p-6 bg-white border border-gray-200 rounded-lg">
-            <img src={social.img} style="height: 100%; width: 100%;" alt={social.href}>
-            <p>{social.href}</p>
-        </a>
-    {/each}
-</section>
+    .transCard:hover {
+        background-color: rgba(230, 230, 230, 0.5);
+    }
+</style>
+
+<div class="bg-gradient-to-br from-green-600">
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-8 px-16 pb-6 pt-4 md:pt-8 xl:pt-16 2xl:pt-24">
+        {#each Socials as social, i}
+            {#if i != 0}
+                <div></div>
+            {/if}
+            <a href={social.href} class="transCard block max-w my-auto p-6 rounded-lg">
+                <img src={social.img} style="height: 100%; width: 100%;" alt={social.href}>
+                <p class="text-center sm:text-xl lg:text-2xl mt-1 sm:mt-4">{social.tag}</p>
+            </a>
+        {/each}
+    </section>
+</div>

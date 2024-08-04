@@ -24,7 +24,7 @@
         -->
         <div class="mx-auto flex flex-wrap justify-between items-center container">
             <NavBrand href={base + "/"}>
-                <img src={base + logo} class="my-3 mr-3 h-9 sm:h-12 md:h-16 lg:h-20 2xl:h-24" alt="MQM Logo" />            </NavBrand>
+                <img src={logo} class="my-3 mr-3 h-9 sm:h-12 md:h-16 lg:h-20 2xl:h-24" alt="MQM Logo" />            </NavBrand>
             <NavHamburger />
             <NavUl class="mx-auto mb-10 md:mb-0" classUl="bg-green-900 border-gray-500 md:bg-transparent md:border-0" {nonActiveClass}>
                 {#if isCustom || true}

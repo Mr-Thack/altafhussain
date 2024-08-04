@@ -28,15 +28,15 @@
     {#await get() then get}
         {#each Object.values(get) as vid}
             <div class="max-w-[90%] h-auto">
-                <a href={base + vid.path + ".mp4"} class="rounded-lg">
+                <a href={vid.path + ".mp4"} class="rounded-lg">
                     <video class="rounded-lg z-0">
-                        <source src={base + vid.path + ".mp4"} type="video/mp4">
+                        <source src={vid.path + ".mp4"} type="video/mp4">
                         <p>
                             Your Browser Does not Support the Video Tag,
                             <br>
                             But you can download the Video here:
                             <br>
-                            <a href={base + vid.path + ".mp4"}>{vid.name}</a>
+                            <a href={vid.path + ".mp4"}>{vid.name}</a>
                         </p>
                     </video>
                 </a>
